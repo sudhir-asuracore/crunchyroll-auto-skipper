@@ -139,3 +139,19 @@ input:checked + .slider:before {
   text-align: center;
   margin-top: 10px;
 }
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.kofi-link img {
+  height: 32px;
+  border: 0;
+  transition: opacity 0.2s;
+}
+
+.kofi-link img:hover {
+  opacity: 0.8;
+}

@@ -1,5 +1,8 @@
 # Crunchyroll Auto Skipper
 
+[![Build Extension](https://github.com/sudhir-asuracore/crunchyroll-auto-skipper/actions/workflows/build.yml/badge.svg)](https://github.com/sudhir-asuracore/crunchyroll-auto-skipper/actions/workflows/build.yml)
+[![Create Release](https://github.com/sudhir-asuracore/crunchyroll-auto-skipper/actions/workflows/release.yml/badge.svg)](https://github.com/sudhir-asuracore/crunchyroll-auto-skipper/actions/workflows/release.yml)
+
 Automatically skip recap, intro, and credits on Crunchyroll.
 
 ## Features
@@ -32,6 +35,12 @@ Click on the extension icon in your browser toolbar to open the settings popup. 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Support
+
+If you find this extension useful, consider buying me a coffee!
+
+<a href='https://ko-fi.com/U7U61FUIAB' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 ## License
 
