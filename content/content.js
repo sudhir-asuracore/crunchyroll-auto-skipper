@@ -1,27 +1,29 @@
 const CONFIG_KEYS = {
-  RECAP: { enabled: 'skipRecap', timer: 'recapTimer' },
-  INTRO: { enabled: 'skipIntro', timer: 'introTimer' },
-  CREDITS: { enabled: 'skipCredits', timer: 'creditsTimer' }
+    RECAP: {enabled: 'skipRecap', timer: 'recapTimer'},
+    INTRO: {enabled: 'skipIntro', timer: 'introTimer'},
+    CREDITS: {enabled: 'skipCredits', timer: 'creditsTimer'}
 };
 
 let userSettings = {
-  skipRecap: true,
-  recapTimer: 0,
-  skipIntro: true,
-  introTimer: 0,
-  skipCredits: true,
-  creditsTimer: 0
+    skipRecap: true,
+    recapTimer: 0,
+    skipIntro: true,
+    introTimer: 0,
+    skipCredits: true,
+    creditsTimer: 0
 };
 
 // Load settings initially and listen for changes
 chrome.storage.local.get(null, (result) => {
-  userSettings = { ...userSettings, ...result };
+    userSettings = {...userSettings, ...result};
+    // Initial check after settings are loaded
+    findSkipButtons(document.body).forEach(handleSkipButton);
 });
 
 chrome.storage.onChanged.addListener((changes) => {
-  for (let [key, { newValue }] of Object.entries(changes)) {
-    userSettings[key] = newValue;
-  }
+    for (let [key, {newValue}] of Object.entries(changes)) {
+        userSettings[key] = newValue;
+    }
 });
 
 /**
@@ -30,42 +32,32 @@ chrome.storage.onChanged.addListener((changes) => {
  * @returns {string|null}
  */
 function getSkipType(element) {
-  const text = element.textContent.toUpperCase();
-  if (text.includes('RECAP')) return 'RECAP';
-  if (text.includes('INTRO') || text.includes('OPENING')) return 'INTRO';
-  if (text.includes('CREDITS') || text.includes('ENDING') || text.includes('OUTRO')) return 'CREDITS';
+    const ariaLabel = element.getAttribute('aria-label');
 
-  // Fallback check for classes if text is not clear
-  const className = element.className.toLowerCase();
-  if (className.includes('recap')) return 'RECAP';
-  if (className.includes('intro') || className.includes('opening')) return 'INTRO';
-  if (className.includes('credits') || className.includes('ending') || className.includes('outro')) return 'CREDITS';
+    if (ariaLabel === 'Skip Recap') return 'RECAP';
+    if (ariaLabel === 'Skip Intro') return 'INTRO';
+    if (ariaLabel === 'Skip Credits') return 'CREDITS';
 
-  return null;
+    return null;
 }
 
-const processedButtons = new WeakSet();
-
 function handleSkipButton(button) {
-  if (processedButtons.has(button)) return;
+    const type = getSkipType(button);
+    if (!type) return;
 
-  const type = getSkipType(button);
-  if (!type) return;
+    const config = CONFIG_KEYS[type];
+    if (userSettings[config.enabled]) {
+        const delay = userSettings[config.timer] * 1000;
+        console.log(`[CR Auto Skipper] Detected ${type} skip button. Waiting ${delay}ms...`);
 
-  const config = CONFIG_KEYS[type];
-  if (userSettings[config.enabled]) {
-    processedButtons.add(button);
-    const delay = userSettings[config.timer] * 1000;
-
-    console.log(`[CR Auto Skipper] Detected ${type} skip button. Waiting ${delay}ms...`);
-
-    setTimeout(() => {
-      if (document.contains(button)) {
-        console.log(`[CR Auto Skipper] Clicking ${type} skip button.`);
-        button.click();
-      }
-    }, delay);
-  }
+        setTimeout(() => {
+            if (document.contains(button)) {
+                console.log(`[CR Auto Skipper] Clicking ${type} skip button.`);
+                console.log("HandleSkip: 4");
+                button.click();
+            }
+        }, delay);
+    }
 }
 
 /**
@@ -74,47 +66,29 @@ function handleSkipButton(button) {
  * @param {Array} found
  */
 function findSkipButtons(root, found = []) {
-  if (root.nodeType !== Node.ELEMENT_NODE) return found;
-
-  if (root.matches('.vilos-skip-button, .erc-skip-button, [class*="skip-button"], [class*="SkipButton"]')) {
-    found.push(root);
-  }
-
-  // Search children
-  root.querySelectorAll('.vilos-skip-button, .erc-skip-button, [class*="skip-button"], [class*="SkipButton"]').forEach(el => found.push(el));
-
-  // Search shadow DOMs
-  if (root.shadowRoot) {
-    findSkipButtons(root.shadowRoot, found);
-  }
-
-  // Recursively search children for shadow roots
-  const allElements = root.querySelectorAll('*');
-  for (const el of allElements) {
-    if (el.shadowRoot) {
-      findSkipButtons(el.shadowRoot, found);
+    const selector = '[aria-label="Skip Intro"][aria-hidden="false"], [aria-label="Skip Recap"][aria-hidden="false"], [aria-label="Skip Credits"][aria-hidden="false"]';
+    if (root.matches(selector)) {
+        found.push(root);
     }
-  }
-
-  return found;
+    root.querySelectorAll(selector).forEach(el => found.push(el));
+    return found;
 }
 
 // Observe DOM for skip buttons
 const observer = new MutationObserver((mutations) => {
-  for (const mutation of mutations) {
-    for (const node of mutation.addedNodes) {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        findSkipButtons(node).forEach(handleSkipButton);
-      }
-    }
-  }
+    mutations
+        .filter(mutation => mutation.type === 'attributes')
+        .filter(mutation => !mutation.target.matches('[data-testid="timestamp"]'))
+        .filter(mutation => mutation.target.matches('[type="button"]'))
+        .forEach(mutation => {
+            findSkipButtons(mutation.target).forEach(handleSkipButton);
+        })
 });
 
 // Start observing
 observer.observe(document.body, {
-  childList: true,
-  subtree: true
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['aria-hidden', 'class', 'aria-label']
 });
-
-// Initial check
-findSkipButtons(document.body).forEach(handleSkipButton);
