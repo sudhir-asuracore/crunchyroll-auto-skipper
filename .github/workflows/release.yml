@@ -49,14 +49,16 @@ jobs:
           git push
 
       - name: Build extension zip
-        run: npm run build
+        run: |
+          npm run build
+          mv crunchyroll-auto-skipper.zip crunchyroll-auto-skipper-v${{ steps.bump.outputs.new_version }}.zip
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.bump.outputs.new_version }}
           name: Release v${{ steps.bump.outputs.new_version }}
-          files: crunchyroll-auto-skipper.zip
+          files: crunchyroll-auto-skipper-v${{ steps.bump.outputs.new_version }}.zip
           draft: false
           prerelease: false
         env:
