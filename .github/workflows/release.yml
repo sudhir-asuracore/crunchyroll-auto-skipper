@@ -44,7 +44,7 @@ jobs:
           # Sync manifest.json
           sed -i "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" manifest.json
           
-          git add package.json manifest.json
+          git add package.json package-lock.json manifest.json
           git commit -m "chore: bump version to $NEW_VERSION"
           git push
 
