@@ -1,0 +1,141 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 320px;
+  padding: 15px;
+  margin: 0;
+  background-color: #141519;
+  color: #ffffff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+h1 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #f47521; /* Crunchyroll orange */
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+}
+
+.option-item:last-child {
+  border-bottom: none;
+}
+
+.item-label {
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  flex-grow: 1; /* Allow label to take available space */
+}
+
+
+.timer-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #ccc;
+  margin-left: auto;
+}
+
+input[type="number"] {
+  width: 45px;
+  background-color: #23252b;
+  border: 1px solid #444;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+/* Toggle Switch Styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #444;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #f47521;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #f47521;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.status {
+  font-size: 0.7rem;
+  color: #888;
+  text-align: center;
+  margin-top: 10px;
+}

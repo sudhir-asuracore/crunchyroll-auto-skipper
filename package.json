@@ -1,0 +1,21 @@
+{
+  "name": "crunchyroll-auto-skipper",
+  "version": "0.0.1",
+  "description": "Automatically skip recap, intro, and credits on Crunchyroll.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "zip -r crunchyroll-auto-skipper.zip . -x \"*.git*\" \"*.iml\" \"node_modules/*\" \"package.json\" \"package-lock.json\" \"*.zip\" \".idea/*\" \".github/*\""
+  },
+  "keywords": [
+    "crunchyroll",
+    "skip",
+    "intro",
+    "recap",
+    "credits",
+    "extension"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {}
+}

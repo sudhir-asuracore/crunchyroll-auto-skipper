@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Crunchyroll Auto Skipper</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="../icons/icon.svg" alt="Panda Icon" class="logo">
+      <h1>Crunchy Skipper</h1>
+    </div>
+
+    <div class="option-group">
+      <div class="option-item">
+        <label class="switch">
+          <input type="checkbox" id="skipRecap">
+          <span class="slider round"></span>
+        </label>
+        <label for="skipRecap" class="item-label">Skip Recap</label>
+        <div class="timer-input">
+          <input type="number" id="recapTimer" min="0" value="0">
+          <span>s delay</span>
+        </div>
+      </div>
+
+      <div class="option-item">
+        <label class="switch">
+          <input type="checkbox" id="skipIntro">
+          <span class="slider round"></span>
+        </label>
+        <label for="skipIntro" class="item-label">Skip Intro</label>
+        <div class="timer-input">
+          <input type="number" id="introTimer" min="0" value="0">
+          <span>s delay</span>
+        </div>
+      </div>
+
+      <div class="option-item">
+        <label class="switch">
+          <input type="checkbox" id="skipCredits">
+          <span class="slider round"></span>
+        </label>
+        <label for="skipCredits" class="item-label">Skip Credits</label>
+        <div class="timer-input">
+          <input type="number" id="creditsTimer" min="0" value="0">
+          <span>s delay</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="status" id="status">Settings saved automatically</div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
