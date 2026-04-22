@@ -12,12 +12,15 @@ chrome.storage.local.get(options.flatMap(o => [o.id, o.timerId]), (result) => {
   });
 });
 
+// Set version number
+document.getElementById('version').textContent = `v${chrome.runtime.getManifest().version}`;
+
 function showStatus() {
   const status = document.getElementById('status');
   status.textContent = 'Settings saved!';
   status.style.color = '#f47521';
   setTimeout(() => {
-    status.textContent = 'Settings saved automatically';
+    status.textContent = 'AutoSave On';
     status.style.color = '#888';
   }, 1000);
 }
