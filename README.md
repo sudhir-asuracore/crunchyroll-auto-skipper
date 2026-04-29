@@ -42,6 +42,10 @@ If you find this extension useful, consider buying me a coffee!
 
 <a href='https://ko-fi.com/U7U61FUIAB' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
+## Privacy Policy
+
+This extension does not collect any data. See the [Privacy Policy](PRIVACY_POLICY.md) for more details.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

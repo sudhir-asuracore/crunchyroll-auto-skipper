@@ -175,6 +175,22 @@ input:checked + .slider:before {
   color: #666;
 }
 
+.separator {
+  font-size: 0.7rem;
+  color: #444;
+}
+
+.privacy-link {
+  font-size: 0.7rem;
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.privacy-link:hover {
+  color: #f47521;
+}
+
 .kofi-link img {
   height: 32px;
   border: 0;
