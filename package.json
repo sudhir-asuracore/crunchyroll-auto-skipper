@@ -1,6 +1,6 @@
 {
   "name": "crunchyroll-auto-skipper",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Automatically skip recap, intro, and credits on Crunchyroll.",
   "main": "index.js",
   "scripts": {
