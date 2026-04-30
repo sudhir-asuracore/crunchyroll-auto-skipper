@@ -12,6 +12,10 @@ Automatically skip recap, intro, and credits on Crunchyroll.
 - **Toggleable Options**: Enable or disable skipping for each section individually via the popup.
 - **Persistent Settings**: Your preferences are saved automatically and synced.
 
+## Install from store
+* Chrome: https://chromewebstore.google.com/detail/crunchyroll-auto-skipper
+* Firefox: https://addons.mozilla.org/en-US/firefox/addon/crunchyroll-auto-skipper/
+
 ## Installation
 
 ### Chrome / Edge / Brave
